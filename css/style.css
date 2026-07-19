@@ -927,232 +927,286 @@ font-size:34px;
 }
 
 }
-
-/*==================================================
-        PREMIUM QUICK FACTS
-==================================================*/
-
-.facts-container{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:30px;
-
-}
-
+/* Card Background */
 .fact-box{
-
-position:relative;
-
-padding:35px;
-
-border-radius:22px;
-
-background:#334155;
-
-overflow:hidden;
-
-transition:.45s;
-
-box-shadow:0 10px 35px rgba(0,0,0,.15);
-
-height:100%;
-
-border:1px solid rgba(255,255,255,.05);
-
+    background:linear-gradient(145deg,#2d3d54,#243446);
 }
 
+/* Top Gradient Line */
 .fact-box::before{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-width:100%;
-
-height:4px;
-
-background:linear-gradient(90deg,#00d084,#00bfff);
-
+    background:linear-gradient(90deg,#4f7cff,#8b5cf6);
 }
 
+/* Hover */
 .fact-box:hover{
-
-transform:translateY(-10px);
-
-box-shadow:0 18px 40px rgba(0,0,0,.30);
-
+    box-shadow:0 18px 40px rgba(79,124,255,.28);
 }
 
+/* Icon */
 .fact-icon{
-
-width:70px;
-
-height:70px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:28px;
-
-background:rgba(0,208,132,.12);
-
-color:#00d084;
-
-margin-bottom:22px;
-
-transition:.4s;
-
+    background:rgba(79,124,255,.15);
+    color:#73a5ff;
 }
 
+/* Hover Icon */
 .fact-box:hover .fact-icon{
-
-transform:rotate(8deg) scale(1.08);
-
+    background:linear-gradient(135deg,#4f7cff,#8b5cf6);
+    color:#fff;
 }
 
+/* Tag */
 .fact-tag{
-
-display:inline-block;
-
-padding:6px 14px;
-
-border-radius:30px;
-
-font-size:12px;
-
-font-weight:700;
-
-letter-spacing:1px;
-
-background:rgba(0,208,132,.12);
-
-color:#00d084;
-
-margin-bottom:18px;
-
+    background:rgba(139,92,246,.15);
+    color:#c4b5fd;
 }
 
+/* Heading */
 .fact-box h3{
-
-font-size:24px;
-
-font-weight:700;
-
-color:#ffffff;
-
-margin-bottom:14px;
-
+    color:#ffffff;
 }
 
+/* Paragraph */
 .fact-box p{
+    color:#cfd8e6;
+}
+/*======================================================
+            WHY HIRE ME - RESPONSIVE PREMIUM
+======================================================*/
 
-font-size:15px;
+.hire-grid{
 
-line-height:1.8;
-
-color:#d6dde7;
-
-margin:0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    align-items:stretch;
 
 }
+
+.hire-card{
+
+    background:linear-gradient(145deg,#304257,#26384b);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    height:100%;
+
+    min-height:340px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.18);
+
+}
+
+.hire-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:linear-gradient(90deg,#ff9800,#ffc107);
+
+}
+
+.hire-card:hover{
+
+    transform:translateY(-12px);
+
+    box-shadow:
+    0 25px 45px rgba(0,0,0,.25);
+
+}
+
+.hire-icon{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    background:rgba(255,193,7,.15);
+
+    color:#ffc107;
+
+    margin-bottom:22px;
+
+    transition:.4s;
+
+}
+
+.hire-card:hover .hire-icon{
+
+    transform:rotate(-10deg) scale(1.08);
+
+    background:#ffc107;
+
+    color:#233142;
+
+}
+
+.hire-card h4{
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.hire-card p{
+
+    color:#d6dde7;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    flex:1;
+
+}
+
+.hire-card span{
+
+    display:inline-block;
+
+    margin-top:22px;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:rgba(255,193,7,.15);
+
+    color:#ffd54f;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/* Premium Green Cards */
+
+.highlight{
+
+    background:linear-gradient(145deg,#24384a,#203245);
+
+}
+
+.highlight::before{
+
+    background:linear-gradient(90deg,#00d084,#00bfff);
+
+}
+
+.highlight .hire-icon{
+
+    background:rgba(0,208,132,.15);
+
+    color:#00d084;
+
+}
+
+.highlight:hover .hire-icon{
+
+    background:#00d084;
+
+    color:#fff;
+
+}
+
+.highlight span{
+
+    background:rgba(0,208,132,.15);
+
+    color:#00d084;
+
+}
+
+/*=========================
+Large Laptop
+=========================*/
+
+@media(max-width:1400px){
+
+.hire-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+/*=========================
+Laptop
+=========================*/
+
+@media(max-width:1100px){
+
+.hire-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+/*=========================
+Tablet
+=========================*/
 
 @media(max-width:768px){
 
-.facts-container{
+.hire-grid{
 
 grid-template-columns:1fr;
 
+gap:20px;
+
 }
 
-.fact-box{
+.hire-card{
+
+min-height:auto;
 
 padding:28px;
-
-}
-
-}
-
-/*======================================================
-                WHY HIRE ME PREMIUM
-======================================================*/
-
-.hire-container{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-gap:28px;
-
-}
-
-.hire-box{
-
-background:#314355;
-
-padding:35px;
-
-border-radius:22px;
-
-transition:.45s;
-
-position:relative;
-
-overflow:hidden;
-
-border:1px solid rgba(255,255,255,.06);
-
-box-shadow:0 12px 35px rgba(0,0,0,.15);
-
-}
-
-.hire-box::before{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-width:100%;
-
-height:4px;
-
-background:linear-gradient(90deg,#00d084,#00bfff);
-
-}
-
-.hire-box:hover{
-
-transform:translateY(-10px);
-
-box-shadow:0 18px 40px rgba(0,0,0,.30);
-
-}
-
-.hire-top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:25px;
 
 }
 
@@ -1162,107 +1216,59 @@ width:65px;
 
 height:65px;
 
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:rgba(0,208,132,.12);
-
-color:#00d084;
-
 font-size:26px;
 
 }
 
-.hire-badge{
+.hire-card h4{
 
-background:rgba(0,208,132,.12);
-
-color:#00d084;
-
-padding:7px 16px;
-
-border-radius:30px;
-
-font-size:12px;
-
-font-weight:700;
-
-letter-spacing:1px;
+font-size:20px;
 
 }
 
-.hire-box h3{
+}
 
-color:#fff;
+/*=========================
+Small Mobile
+=========================*/
 
-font-size:24px;
+@media(max-width:480px){
 
-margin-bottom:18px;
+.hire-card{
+
+padding:22px;
+
+border-radius:18px;
 
 }
 
-.hire-box p{
+.hire-card h4{
 
-color:#d6dde7;
-
-line-height:1.8;
-
-margin-bottom:30px;
+font-size:19px;
 
 }
 
-.hire-footer span{
-
-display:block;
-
-color:#ffffff;
+.hire-card p{
 
 font-size:14px;
 
-margin-bottom:10px;
+}
+
+.hire-icon{
+
+width:58px;
+
+height:58px;
+
+font-size:22px;
 
 }
 
-.hire-progress{
+.hire-card span{
 
-height:8px;
+font-size:11px;
 
-background:#425364;
-
-border-radius:20px;
-
-overflow:hidden;
-
-}
-
-.progress-fill{
-
-height:100%;
-
-background:linear-gradient(90deg,#00d084,#00bfff);
-
-border-radius:20px;
-
-}
-
-.fill-80{width:80%;}
-
-.fill-85{width:85%;}
-
-.fill-90{width:90%;}
-
-.fill-95{width:95%;}
-
-@media(max-width:768px){
-
-.hire-container{
-
-grid-template-columns:1fr;
+padding:7px 14px;
 
 }
 
@@ -1445,67 +1451,151 @@ grid-template-columns:1fr;
 }
 
 }
-
 /*=========================================
-        LEARNING JOURNEY
+        LEARNING JOURNEY PREMIUM V2
 =========================================*/
 
 .journey-grid{
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(420px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
 gap:30px;
+align-items:stretch;
 
 }
+
+/*========================
+CARD
+========================*/
 
 .journey-card{
 
-background:#314355;
-padding:35px;
-border-radius:24px;
-box-shadow:0 15px 40px rgba(0,0,0,.15);
-transition:.4s;
 position:relative;
+
 overflow:hidden;
+
+padding:35px;
+
+border-radius:24px;
+
 border:1px solid rgba(255,255,255,.08);
 
+transition:.35s;
+
+height:100%;
+
+backdrop-filter:blur(12px);
+
+-webkit-backdrop-filter:blur(12px);
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.25);
+
 }
 
-.journey-card:hover{
+/* Left Card */
 
-transform:translateY(-10px);
+.current-card{
+
+background:
+linear-gradient(145deg,#1f3833,#243f39);
 
 }
+
+/* Right Card */
+
+.roadmap-card{
+
+background:
+linear-gradient(145deg,#233654,#1f2d46);
+
+}
+
+/* Accent */
 
 .current-card::before{
 
 content:"";
+
 position:absolute;
+
 left:0;
+
 top:0;
-height:5px;
+
 width:100%;
-background:#00B87B;
+
+height:5px;
+
+background:linear-gradient(90deg,#00d084,#29ffbf);
 
 }
 
 .roadmap-card::before{
 
 content:"";
+
 position:absolute;
+
 left:0;
+
 top:0;
-height:5px;
+
 width:100%;
-background:#0d6efd;
+
+height:5px;
+
+background:linear-gradient(90deg,#4b7dff,#00d4ff);
 
 }
+
+/* Glow */
+
+.journey-card::after{
+
+content:"";
+
+position:absolute;
+
+width:220px;
+
+height:220px;
+
+right:-80px;
+
+bottom:-80px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.04);
+
+pointer-events:none;
+
+}
+
+/* Hover */
+
+.journey-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:
+0 25px 55px rgba(0,0,0,.35);
+
+}
+
+/*========================
+TITLE
+========================*/
 
 .journey-title{
 
 display:flex;
+
 align-items:center;
-gap:20px;
+
+gap:18px;
+
 margin-bottom:30px;
 
 }
@@ -1513,123 +1603,231 @@ margin-bottom:30px;
 .journey-icon{
 
 width:70px;
+
 height:70px;
-border-radius:50%;
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
-font-size:28px;
+
+font-size:30px;
+
+border-radius:18px;
+
 color:white;
+
+flex-shrink:0;
+
+transition:.35s;
 
 }
 
 .current-icon{
 
-background:linear-gradient(135deg,#00B87B,#00d084);
+background:
+linear-gradient(135deg,#00d084,#24ffb5);
+
+box-shadow:
+0 0 25px rgba(0,208,132,.35);
 
 }
 
 .roadmap-icon{
 
-background:linear-gradient(135deg,#2962ff,#00b0ff);
+background:
+linear-gradient(135deg,#4b7dff,#00d4ff);
+
+box-shadow:
+0 0 25px rgba(0,170,255,.35);
+
+}
+
+.journey-card:hover .journey-icon{
+
+transform:rotate(-8deg) scale(1.08);
 
 }
 
 .journey-title h3{
 
 margin:0;
-color:white;
+
+font-size:25px;
+
+font-weight:700;
+
+color:#fff;
 
 }
 
 .journey-title p{
 
-margin:3px 0 0;
-color:#cfd8dc;
+margin-top:5px;
+
+font-size:14px;
+
+color:#b8c5d1;
 
 }
+
+/*========================
+CURRENT JOURNEY
+========================*/
 
 .journey-items{
 
 display:flex;
+
 flex-direction:column;
-gap:22px;
+
+gap:18px;
 
 }
 
 .journey-item{
 
 display:flex;
+
 gap:18px;
+
 align-items:flex-start;
+
+padding:18px;
+
+border-radius:16px;
+
+background:rgba(255,255,255,.05);
+
+transition:.35s;
+
+}
+
+.journey-item:hover{
+
+background:rgba(255,255,255,.10);
+
+transform:translateX(8px);
 
 }
 
 .status{
 
-width:14px;
-height:14px;
+width:15px;
+
+height:15px;
+
 border-radius:50%;
-margin-top:8px;
+
+margin-top:7px;
+
 flex-shrink:0;
 
 }
 
 .done{
 
-background:#00B87B;
+background:#00ff9d;
 
-box-shadow:0 0 12px #00B87B;
+box-shadow:
+
+0 0 10px #00ff9d,
+
+0 0 25px rgba(0,255,157,.5);
 
 }
 
 .progress{
 
-background:#ffc107;
+background:#ffbf00;
 
-box-shadow:0 0 12px #ffc107;
+box-shadow:
+
+0 0 10px #ffbf00,
+
+0 0 25px rgba(255,191,0,.5);
 
 }
 
 .journey-item h5{
 
-margin:0;
-color:white;
+margin:0 0 6px;
+
 font-size:18px;
+
+font-weight:600;
+
+color:white;
 
 }
 
 .journey-item small{
 
-color:#cfd8dc;
-line-height:1.6;
+display:block;
+
+font-size:14px;
+
+line-height:1.7;
+
+color:#d4dde7;
 
 }
+
+/*========================
+ROADMAP
+========================*/
 
 .roadmap-list{
 
 display:flex;
+
 flex-direction:column;
-gap:18px;
+
+gap:16px;
 
 }
 
 .roadmap-step{
 
 display:flex;
+
 align-items:center;
+
 gap:18px;
-background:rgba(255,255,255,.05);
+
 padding:18px;
-border-radius:14px;
-transition:.3s;
+
+border-radius:16px;
+
+background:
+
+linear-gradient(90deg,
+
+rgba(255,255,255,.05),
+
+rgba(255,255,255,.02));
+
+border-left:4px solid #4b7dff;
+
+transition:.35s;
+
 color:white;
 
 }
 
 .roadmap-step:hover{
 
-background:rgba(255,255,255,.10);
+background:
+
+linear-gradient(90deg,
+
+rgba(75,125,255,.20),
+
+rgba(255,255,255,.04));
+
+border-left-color:#00d4ff;
+
 transform:translateX(8px);
 
 }
@@ -1637,21 +1835,216 @@ transform:translateX(8px);
 .roadmap-step span{
 
 width:42px;
+
 height:42px;
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
+
 border-radius:50%;
-background:#0d6efd;
+
+background:
+
+linear-gradient(135deg,#4b7dff,#00d4ff);
+
 font-weight:700;
+
+font-size:15px;
+
+box-shadow:
+
+0 0 18px rgba(0,170,255,.35);
+
+flex-shrink:0;
+
+}
+
+/*========================
+RESPONSIVE
+========================*/
+
+@media(max-width:992px){
+
+.journey-grid{
+
+grid-template-columns:1fr;
+
+}
 
 }
 
 @media(max-width:768px){
 
+.journey-card{
+
+padding:24px;
+
+border-radius:18px;
+
+}
+
+.journey-title{
+
+gap:15px;
+
+margin-bottom:22px;
+
+}
+
+.journey-icon{
+
+width:58px;
+
+height:58px;
+
+font-size:24px;
+
+border-radius:15px;
+
+}
+
+.journey-title h3{
+
+font-size:21px;
+
+}
+
+.journey-title p{
+
+font-size:13px;
+
+}
+
+.journey-item{
+
+padding:15px;
+
+gap:14px;
+
+}
+
+.journey-item:hover{
+
+transform:none;
+
+}
+
+.journey-item h5{
+
+font-size:16px;
+
+}
+
+.journey-item small{
+
+font-size:13px;
+
+line-height:1.6;
+
+}
+
+.roadmap-step{
+
+padding:15px;
+
+gap:14px;
+
+}
+
+.roadmap-step:hover{
+
+transform:none;
+
+}
+
+.roadmap-step span{
+
+width:36px;
+
+height:36px;
+
+font-size:13px;
+
+}
+
+}
+
+@media(max-width:480px){
+
 .journey-grid{
 
 grid-template-columns:1fr;
+
+gap:20px;
+
+}
+
+.journey-card{
+
+padding:20px;
+
+}
+
+.journey-title{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:12px;
+
+}
+
+.journey-icon{
+
+width:50px;
+
+height:50px;
+
+font-size:20px;
+
+}
+
+.journey-title h3{
+
+font-size:18px;
+
+}
+
+.journey-item{
+
+padding:14px;
+
+}
+
+.journey-item h5{
+
+font-size:15px;
+
+}
+
+.journey-item small{
+
+font-size:12px;
+
+}
+
+.roadmap-step{
+
+padding:13px;
+
+}
+
+.roadmap-step span{
+
+width:32px;
+
+height:32px;
+
+font-size:12px;
 
 }
 
@@ -3601,3 +3994,218 @@ line-height:1.8;
     line-height:1.8;
 
 }
+
+/* =========================================
+   MY CURRENT GOAL
+========================================= */
+
+.goal-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:linear-gradient(135deg,#243447,#2d445c);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.goal-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:5px;
+
+    height:100%;
+
+    background:#00d084;
+
+}
+
+.goal-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.goal-icon{
+
+    width:90px;
+
+    height:90px;
+
+    min-width:90px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:42px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.goal-content{
+
+    flex:1;
+
+}
+
+.goal-badge{
+
+    display:inline-block;
+
+    padding:6px 16px;
+
+    border-radius:30px;
+
+    background:#00d084;
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:18px;
+
+}
+
+.goal-content h3{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+    color:#ffffff;
+
+}
+
+.goal-content p{
+
+    color:#d6d6d6;
+
+    line-height:1.8;
+
+    margin-bottom:16px;
+
+    text-align:justify;
+
+}
+
+.goal-tech{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.goal-tech span{
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+    font-size:13px;
+
+    transition:.3s;
+
+}
+
+.goal-tech span:hover{
+
+    background:#00d084;
+
+    transform:translateY(-3px);
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.goal-card{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    padding:28px;
+
+}
+
+.goal-content p{
+
+    text-align:left;
+
+}
+
+.goal-tech{
+
+    justify-content:center;
+
+}
+
+.goal-content h3{
+
+    font-size:24px;
+
+}
+
+.goal-icon{
+
+    width:80px;
+
+    height:80px;
+
+    min-width:80px;
+
+    font-size:36px;
+
+}
+
+}
+
+
+
+
+
