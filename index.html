@@ -48,6 +48,34 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "xpzh58rgjr");
 </script>
+
+<style>
+/* FORCE FIX: journey-item status dots being overridden by
+   the later .status (pill) rule defined in Projects Timeline */
+.journey-item .status {
+    width: 15px !important;
+    height: 15px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    margin-top: 7px !important;
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    font-size: 0 !important;
+    white-space: normal !important;
+    display: inline-block !important;
+}
+
+.journey-item .status.done {
+    background: #00ff9d !important;
+    box-shadow: 0 0 10px #00ff9d, 0 0 25px rgba(0,255,157,.5) !important;
+}
+
+.journey-item .status.progress {
+    background: #ffbf00 !important;
+    box-shadow: 0 0 10px #ffbf00, 0 0 25px rgba(255,191,0,.5) !important;
+}
+</style>
     </head>
 
     <body>
