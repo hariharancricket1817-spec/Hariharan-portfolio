@@ -5734,4 +5734,13 @@ height:44px;
 
 }
 
+/* Mobile-only fix: let the dropdown menu escape the navbar's clipped box */
+@media (max-width: 992px) {
+  .glass-navbar {
+    overflow: visible !important;
+  }
+  .nav-menu {
+    z-index: 9998; /* sits below navbar (9999) but above page content */
+  }
+}
 
