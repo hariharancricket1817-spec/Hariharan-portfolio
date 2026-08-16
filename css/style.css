@@ -5744,3 +5744,28 @@ height:44px;
   }
 }
 
+
+/* Fix: journey-item status dots getting overridden by the later
+   .status (pill) rule from the Projects Timeline section.
+   Scoped to .journey-item .status only — timeline pills untouched. */
+.journey-item .status{
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+    font-size: 0;        /* hides any stray text node */
+    white-space: normal;
+}
+
+.journey-item .status.done{
+    background:#00ff9d;
+    box-shadow: 0 0 10px #00ff9d, 0 0 25px rgba(0,255,157,.5);
+}
+
+.journey-item .status.progress{
+    background:#ffbf00;
+    box-shadow: 0 0 10px #ffbf00, 0 0 25px rgba(255,191,0,.5);
+}
+
