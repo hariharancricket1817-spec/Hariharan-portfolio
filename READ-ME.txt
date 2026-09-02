@@ -1,9 +1,169 @@
-  =>  Template Name    : DarkCV - Bootstrap CV Resume Template
+# Hariharan J T — DevOps & Cloud Engineer Portfolio
 
-  =>  Template Link    : https://htmlcodex.com/bootstrap-cv-resume-template
+> A personal portfolio showcasing my journey, projects, skills, and hands-on experience in DevOps, Cloud Computing, Linux, and automation.
 
-  =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
+## 👋 About Me
 
-  =>  Template Author  : HTML Codex
+Hi, I'm **Hariharan J T**, a final-year Computer Science and Engineering student with a strong interest in **DevOps and Cloud Engineering**.
 
-  =>  Author Website   : https://htmlcodex.com
+I enjoy learning how applications are deployed, managed, automated, and maintained in real-world environments. My current focus is on building strong fundamentals in **Linux, Git, GitHub, AWS, Bash scripting, Docker, and deployment workflows**.
+
+I believe in learning by building practical projects and continuously improving my technical skills.
+
+---
+
+## 🎯 Career Goal
+
+My goal is to start my career as a **DevOps / Cloud Engineer** and develop strong expertise in:
+
+- Linux Administration
+- Cloud Infrastructure
+- CI/CD
+- Infrastructure Automation
+- Containerization
+- Deployment & Monitoring
+- DevOps Practices
+
+---
+
+## 🛠️ Technical Skills
+
+### DevOps & Cloud
+- AWS
+- Docker
+- Docker Compose
+- Deployment Workflows
+- CI/CD Fundamentals
+
+### Linux & Scripting
+- Linux (Ubuntu)
+- Bash Shell Scripting
+- Linux Command Line
+- Basic Server Administration
+
+### Version Control
+- Git
+- GitHub
+- Repository Management
+- Branching & Collaboration
+
+### Programming
+- Python
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+
+### AI Tools
+- ChatGPT
+- Claude AI
+- GitHub Copilot
+
+### Soft Skills
+- Communication
+- Teamwork
+- Adaptability
+- Problem Solving
+
+---
+
+## 🚀 Featured Projects
+
+### 🔧 GitOps CLI
+
+A Linux-based command-line toolkit designed to simplify repetitive Git and Linux development tasks.
+
+**Focus:**
+- Linux
+- Bash
+- Git
+- GitHub
+- Automation
+
+**Planned Features:**
+- Project initialization
+- Git repository setup
+- Repository status
+- System information
+- Project backup
+- Directory management
+- Repository statistics
+- CLI help and documentation
+
+> This project is being developed progressively as I learn more Linux and Bash concepts.
+
+---
+
+### 🎓 Smart College Management System
+
+A collaborative college management platform designed to provide useful tools for students and staff.
+
+**Highlights:**
+- Student and staff workflows
+- Assignment management
+- Document management
+- AI-based handwriting verification
+- Dashboard and analytics
+- GitHub-based team collaboration
+
+**My Role:**
+- Student Project Team Lead
+- Project coordination
+- GitHub repository management
+- Development workflow coordination
+
+---
+
+### ☁️ AWS Portfolio Deployment
+
+Deployed my portfolio website on an **AWS EC2 Linux server** using:
+
+- AWS EC2
+- Ubuntu/Linux
+- SSH
+- Git
+- Nginx
+- Security Groups
+- HTTP/HTTPS fundamentals
+
+This project helped me gain practical experience with cloud deployment and Linux server management.
+
+---
+
+## 📚 Currently Learning
+
+I'm continuously expanding my DevOps and Cloud knowledge.
+
+### Current Focus
+
+```text
+Linux
+   ↓
+Git & GitHub
+   ↓
+Bash Scripting
+   ↓
+Docker
+   ↓
+AWS
+   ↓
+CI/CD
+   ↓
+Infrastructure as Code
+   ↓
+Cloud & DevOps
+
+🌐 Connect With Me
+
+LinkedIn:
+www.linkedin.com/in/hariharan-j-t-464818225
+
+GitHub:
+https://github.com/hariharancricket1817-spec
+
+Portfolio:
+https://hariharancricket1817-spec
+
+Email:
+hariharancricket1817@gmail.com

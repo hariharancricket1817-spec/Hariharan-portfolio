@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | Hariharan Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+
+/* =========================================================
+   GALLERY PAGE — SELF-CONTAINED (gal- namespace)
+   True JS masonry (balanced columns), auto video-thumbnail
+   generation, broken-file fallback cards, mobile-tuned lightbox.
+========================================================= */
+
+:root{
+    --gal-primary:#00B87B;
+    --gal-accent:#00d084;
+    --gal-accent2:#00bfff;
+    --gal-bg:#151f2c;
+    --gal-card:#212f42;
+    --gal-text:#e8edf2;
+    --gal-sub:#aebdcc;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+    margin:0;
+    background:var(--gal-bg);
+    color:var(--gal-text);
+    font-family:'Segoe UI', Roboto, Arial, sans-serif;
+    padding-bottom:60px;
+}
+
+/* ---------- HEADER ---------- */
+
+.gal-header{
+    text-align:center;
+    padding:70px 20px 40px;
+    background:radial-gradient(circle at 50% 0%, rgba(0,208,132,.10), transparent 60%);
+}
+
+.gal-header .gal-back{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--gal-accent);
+    text-decoration:none;
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:25px;
+    transition:.3s;
+}
+.gal-header .gal-back:hover{ transform:translateX(-4px); }
+
+.gal-header h1{
+    font-size:clamp(28px,5vw,42px);
+    font-weight:800;
+    margin:0 0 12px;
+    background:linear-gradient(90deg,var(--gal-accent),var(--gal-accent2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.gal-header p{
+    color:var(--gal-sub);
+    max-width:600px;
+    margin:0 auto;
+    font-size:16px;
+    line-height:1.7;
+}
+
+/* ---------- FILTER TABS ---------- */
+
+.gal-filters{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:35px auto 45px;
+    padding:0 20px;
+}
+
+.gal-filter-btn{
+    padding:12px 26px;
+    border-radius:50px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    color:var(--gal-sub);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.gal-filter-btn:hover{
+    background:rgba(0,208,132,.12);
+    color:#fff;
+}
+
+.gal-filter-btn.active{
+    background:linear-gradient(135deg,var(--gal-accent),var(--gal-accent2));
+    color:#fff;
+    border-color:transparent;
+    box-shadow:0 8px 20px rgba(0,208,132,.3);
+}
+
+/* ---------- TRUE MASONRY GRID (flex columns, JS-balanced) ---------- */
+
+.gal-container{
+    max-width:1300px;
+    margin:0 auto;
+    padding:0 25px;
+}
+
+.gal-grid{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    width:100%;
+}
+
+.gal-col{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    flex:1 1 0;
+    min-width:0;
+}
+
+.gal-card{
+    width:100%;
+    background:var(--gal-card);
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    transition:.4s;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(25px);
+    animation:galFadeIn .6s forwards;
+}
+
+@keyframes galFadeIn{
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.gal-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 50px rgba(0,0,0,.35), 0 0 25px rgba(0,208,132,.15);
+}
+
+/* ---------- MEDIA ---------- */
+
+.gal-media{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    background:#0e1620;
+    line-height:0;
+}
+
+.gal-media img,
+.gal-media video,
+.gal-media canvas{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:.5s;
+}
+
+.gal-card:hover .gal-media img,
+.gal-card:hover .gal-media video{
+    transform:scale(1.05);
+}
+
+.gal-play-icon{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:60px; height:60px;
+    border-radius:50%;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:22px;
+    transition:.3s;
+    pointer-events:none;
+    z-index:2;
+}
+
+.gal-card:hover .gal-play-icon{
+    background:var(--gal-primary);
+    transform:translate(-50%,-50%) scale(1.1);
+}
+
+.gal-type-badge{
+    position:absolute;
+    top:14px; right:14px;
+    padding:6px 14px;
+    border-radius:50px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:#fff;
+    backdrop-filter:blur(6px);
+    z-index:2;
+}
+.gal-type-badge.photo{ background:rgba(0,208,132,.75); }
+.gal-type-badge.video{ background:rgba(0,191,255,.75); }
+
+/* Broken-file fallback card */
+.gal-broken{
+    width:100%;
+    aspect-ratio:4/3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    background:linear-gradient(145deg,#1c2839,#26344a);
+    color:var(--gal-sub);
+    padding:20px;
+    text-align:center;
+}
+.gal-broken i{
+    font-size:32px;
+    color:#4c5c72;
+}
+.gal-broken span{
+    font-size:12.5px;
+    line-height:1.5;
+    word-break:break-all;
+}
+
+.gal-info{
+    padding:22px 24px 26px;
+}
+
+.gal-info h3{
+    margin:0 0 8px;
+    font-size:18px;
+    font-weight:700;
+    color:#fff;
+    line-height:1.4;
+}
+
+.gal-info p{
+    margin:0;
+    font-size:14px;
+    line-height:1.7;
+    color:var(--gal-sub);
+}
+
+.gal-tag{
+    display:inline-block;
+    margin-top:14px;
+    padding:6px 14px;
+    border-radius:50px;
+    background:rgba(0,208,132,.12);
+    color:var(--gal-accent);
+    font-size:12px;
+    font-weight:600;
+}
+
+/* ---------- LOADING STATE (while assets are being probed) ---------- */
+
+.gal-loading-msg{
+    text-align:center;
+    padding:80px 20px;
+    color:var(--gal-sub);
+}
+.gal-loading-msg i{
+    font-size:32px;
+    color:var(--gal-primary);
+    display:block;
+    margin-bottom:16px;
+    animation:galSpin 1s linear infinite;
+}
+@keyframes galSpin{ to{ transform:rotate(360deg); } }
+
+/* ---------- EMPTY STATE ---------- */
+
+.gal-empty{
+    text-align:center;
+    padding:80px 20px;
+    color:var(--gal-sub);
+    display:none;
+}
+.gal-empty i{
+    font-size:42px;
+    margin-bottom:18px;
+    color:var(--gal-primary);
+    display:block;
+}
+
+/* ---------- LIGHTBOX ---------- */
+
+.gal-lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(6,10,16,.94);
+    backdrop-filter:blur(8px);
+    z-index:99999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    flex-direction:column;
+    overflow-y:auto;
+}
+
+.gal-lightbox.show{ display:flex; }
+
+.gal-lightbox-content{
+    max-width:900px;
+    width:100%;
+    max-height:70vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.gal-lightbox-content img,
+.gal-lightbox-content video{
+    max-width:100%;
+    max-height:70vh;
+    width:auto;
+    height:auto;
+    border-radius:14px;
+    box-shadow:0 25px 60px rgba(0,0,0,.5);
+}
+
+.gal-lightbox-content .gal-broken{
+    width:320px;
+    max-width:85vw;
+    aspect-ratio:4/3;
+    border-radius:14px;
+}
+
+.gal-lightbox-caption{
+    max-width:700px;
+    width:100%;
+    text-align:center;
+    margin-top:22px;
+    padding:0 20px;
+    flex-shrink:0;
+}
+
+.gal-lightbox-caption h3{
+    margin:0 0 8px;
+    color:#fff;
+    font-size:20px;
+}
+
+.gal-lightbox-caption p{
+    margin:0;
+    color:var(--gal-sub);
+    font-size:14.5px;
+    line-height:1.7;
+}
+
+.gal-close-btn{
+    position:fixed;
+    top:20px; right:22px;
+    width:48px; height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.18);
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.3s;
+    z-index:100000;
+}
+.gal-close-btn:hover{
+    background:var(--gal-primary);
+    transform:rotate(90deg);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:1100px){
+    .gal-grid{ gap:22px; }
+    .gal-col{ gap:22px; }
+}
+
+@media(max-width:768px){
+    .gal-header{ padding:50px 18px 30px; }
+    .gal-grid{ gap:16px; }
+    .gal-col{ gap:16px; }
+    .gal-card{ border-radius:16px; }
+    .gal-info{ padding:16px 18px 20px; }
+    .gal-info h3{ font-size:16px; }
+    .gal-info p{ font-size:13px; }
+
+    .gal-lightbox{ padding:70px 16px 30px; }
+    .gal-lightbox-content{ max-height:52vh; }
+    .gal-lightbox-content img,
+    .gal-lightbox-content video{ max-height:52vh; }
+    .gal-lightbox-caption h3{ font-size:17px; }
+    .gal-lightbox-caption p{ font-size:13.5px; }
+    .gal-close-btn{ top:14px; right:14px; width:44px; height:44px; font-size:18px; }
+}
+
+@media(max-width:560px){
+    .gal-filters{ gap:8px; }
+    .gal-filter-btn{ padding:10px 18px; font-size:13px; }
+    .gal-lightbox{ padding:64px 14px 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<div class="gal-header">
+    <a href="index.html" class="gal-back">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+    <h1>Professional Gallery</h1>
+    <p>Awards, recognitions and speaking moments captured along my journey as a DevOps &amp; Cloud enthusiast.</p>
+</div>
+
+<!-- ================= FILTERS ================= -->
+<div class="gal-filters">
+    <button class="gal-filter-btn active" data-filter="all">All</button>
+    <button class="gal-filter-btn" data-filter="photo">Photos</button>
+    <button class="gal-filter-btn" data-filter="video">Videos</button>
+</div>
+
+<!-- ================= GRID ================= -->
+<div class="gal-container">
+    <div class="gal-grid" id="galGrid"></div>
+
+    <div class="gal-empty" id="galEmpty">
+        <i class="fas fa-images"></i>
+        No items in this category yet.
+    </div>
+</div>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="gal-lightbox" id="galLightbox">
+    <button class="gal-close-btn" id="galCloseBtn"><i class="fas fa-times"></i></button>
+    <div class="gal-lightbox-content" id="galLightboxContent"></div>
+    <div class="gal-lightbox-caption">
+        <h3 id="galLightboxTitle"></h3>
+        <p id="galLightboxDesc"></p>
+    </div>
+</div>
+
+<script>
+/* =========================================================
+   GALLERY DATA
+   Add new items here — nothing else to configure.
+   type: "photo" or "video"
+   src : image path OR video path (mp4)
+   Videos auto-generate their own thumbnail from frame 1.
+========================================================= */
+
+const galleryItems = [
+    {
+        type: "photo",
+        src: "assets/hari speech.jpeg",
+        title: "First Stage Speaking – Surya Engineering College",
+        description: "Delivering a speech about AI technology revolution in 2023 during a college event at Surya Engineering College.",
+        tag: "Speech"
+    },
+    {
+        type: "photo",
+        src: "assets/hari marathon.jpeg",
+        title: "Marathon Participation",
+        description: "Participated in a Nandha Engineering College-organized marathon event for blood donation awareness.",
+        tag: "Event"
+    },
+    {
+        type: "photo",
+        src: "assets/hari project.jpeg",
+        title: "Deaf Audio Enhancer – Project Demo",
+        description: "Presenting the Deaf Audio Enhancer project alongside teammates during a demonstration , My role in this project is to build an basic webpage to demonstrate its functionality also presented in event for experience.",
+        tag: "Project"
+    },
+    {
+        type: "photo",
+        src: "assets/hari mit.jpeg",
+        title: "MIT college Spring-boot Workshop",
+        description: "Attended a Spring-boot workshop at MIT college, for exploring to gain the knowledge of Spring-boot framework and its applications.",
+        tag: "Workshop"
+    },
+    {
+        type: "video",
+        src: "assets/hari video.mp4",
+        title: "Random Topic-Speech",
+        description: "Done a random topic speech in front of the students at my college.",
+        tag: "Speech"
+    }
+];
+
+/* ========================================================= */
+
+const galGrid = document.getElementById('galGrid');
+const galEmpty = document.getElementById('galEmpty');
+const galFilterBtns = document.querySelectorAll('.gal-filter-btn');
+
+let currentFilter = 'all';
+let resizeTimer = null;
+let lastColumnCount = null;
+
+/* ---- broken-file fallback markup ---- */
+function brokenCardHTML(src, label){
+    return `
+        <div class="gal-broken">
+            <i class="fas fa-image"></i>
+            <span>${label} not found:<br>${src}</span>
+        </div>
+    `;
+}
+
+/* ---- how many columns for the current viewport ---- */
+function getColumnCount(){
+    const w = window.innerWidth;
+    if (w <= 560) return 1;
+    if (w <= 1100) return 2;
+    return 3;
+}
+
+/* ---- probe a photo's natural aspect ratio ---- */
+function probePhoto(item){
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve({
+            item,
+            aspect: img.naturalWidth / img.naturalHeight,
+            thumbSrc: item.src,
+            broken: false
+        });
+        img.onerror = () => resolve({
+            item,
+            aspect: 4/3,
+            thumbSrc: null,
+            broken: true
+        });
+        img.src = item.src;
+    });
+}
+
+/* ---- auto-generate + probe a video's thumbnail frame ---- */
+function probeVideo(item){
+    return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.src = item.src;
+        video.crossOrigin = 'anonymous';
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        video.style.position = 'absolute';
+        video.style.opacity = '0';
+        video.style.pointerEvents = 'none';
+        video.style.width = '1px';
+        video.style.height = '1px';
+        document.body.appendChild(video);
+
+        let settled = false;
+        const finish = (result) => {
+            if (settled) return;
+            settled = true;
+            video.remove();
+            resolve(result);
+        };
+
+        const failTimer = setTimeout(() => {
+            finish({ item, aspect: 16/10, thumbSrc: null, broken: true });
+        }, 6000);
+
+        video.addEventListener('loadedmetadata', () => {
+            const seekTo = Math.min(1, (video.duration || 1) * 0.1);
+            try { video.currentTime = seekTo; } catch(e) {
+                clearTimeout(failTimer);
+                finish({ item, aspect: 16/10, thumbSrc: null, broken: true });
+            }
+        });
+
+        video.addEventListener('seeked', () => {
+            if (settled) return;
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+                clearTimeout(failTimer);
+                finish({
+                    item,
+                    aspect: canvas.width / canvas.height,
+                    thumbSrc: dataUrl,
+                    broken: false
+                });
+            } catch (e) {
+                clearTimeout(failTimer);
+                finish({ item, aspect: 16/10, thumbSrc: null, broken: true });
+            }
+        });
+
+        video.addEventListener('error', () => {
+            clearTimeout(failTimer);
+            finish({ item, aspect: 16/10, thumbSrc: null, broken: true });
+        });
+    });
+}
+
+/* ---- build one card element from a probed result ---- */
+function buildCard(result){
+    const { item, aspect, thumbSrc, broken } = result;
+    const card = document.createElement('div');
+    card.className = 'gal-card';
+
+    const badgeHTML = `
+        <span class="gal-type-badge ${item.type}">
+            ${item.type === 'video' ? 'Video' : 'Photo'}
+        </span>
+    `;
+
+    let mediaInner;
+    if (broken) {
+        mediaInner = item.type === 'video'
+            ? `<div class="gal-broken" style="aspect-ratio:16/10;">
+                   <i class="fas fa-video"></i>
+                   <span>Tap to play video</span>
+               </div>`
+            : brokenCardHTML(item.src, 'Photo');
+    } else {
+        mediaInner = `<img src="${thumbSrc}" alt="${item.title}" style="aspect-ratio:${aspect};object-fit:cover;">`;
+    }
+
+    card.innerHTML = `
+        <div class="gal-media">
+            ${mediaInner}
+            ${badgeHTML}
+            ${item.type === 'video' ? '<div class="gal-play-icon"><i class="fas fa-play"></i></div>' : ''}
+        </div>
+        <div class="gal-info">
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            ${item.tag ? `<span class="gal-tag">${item.tag}</span>` : ''}
+        </div>
+    `;
+
+    card.addEventListener('click', () => openLightbox(item));
+    return card;
+}
+
+/* ---- estimate a card's total rendered height for balancing ---- */
+function estimateCardHeight(result, columnWidth){
+    const mediaHeight = columnWidth / result.aspect;
+    const infoHeight = 90 + Math.ceil(result.item.description.length / 40) * 20; // rough text wrap estimate
+    return mediaHeight + infoHeight;
+}
+
+/* ---- main render: probe all items, then balance into columns ---- */
+async function renderGallery(filter) {
+    currentFilter = filter;
+    galGrid.innerHTML = `
+        <div class="gal-loading-msg">
+            <i class="fas fa-spinner"></i>
+            Loading gallery...
+        </div>
+    `;
+    galEmpty.style.display = 'none';
+
+    const filtered = filter === 'all'
+        ? galleryItems
+        : galleryItems.filter(i => i.type === filter);
+
+    if (filtered.length === 0) {
+        galGrid.innerHTML = '';
+        galEmpty.style.display = 'block';
+        return;
+    }
+
+    const results = await Promise.all(
+        filtered.map(item => item.type === 'video' ? probeVideo(item) : probePhoto(item))
+    );
+
+    // only re-render if the filter hasn't changed while probing was in flight
+    if (currentFilter !== filter) return;
+
+    const columnCount = getColumnCount();
+    lastColumnCount = columnCount;
+
+    galGrid.innerHTML = '';
+    const columnEls = [];
+    const columnHeights = new Array(columnCount).fill(0);
+
+    for (let i = 0; i < columnCount; i++) {
+        const col = document.createElement('div');
+        col.className = 'gal-col';
+        galGrid.appendChild(col);
+        columnEls.push(col);
+    }
+
+    const approxColWidth = (galGrid.clientWidth - (columnCount - 1) * 28) / columnCount;
+
+    results.forEach((result, index) => {
+        // shortest column gets the next card — keeps left/center/right balanced
+        let shortestIndex = 0;
+        for (let i = 1; i < columnCount; i++) {
+            if (columnHeights[i] < columnHeights[shortestIndex]) shortestIndex = i;
+        }
+
+        const card = buildCard(result);
+        card.style.animationDelay = (index * 0.05) + 's';
+        columnEls[shortestIndex].appendChild(card);
+        columnHeights[shortestIndex] += estimateCardHeight(result, approxColWidth) + 28;
+    });
+}
+
+/* ---------- FILTER CLICK ---------- */
+galFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        galFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGallery(btn.dataset.filter);
+    });
+});
+
+/* ---------- REBUILD ON RESIZE (only when column count actually changes) ---------- */
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        const newCount = getColumnCount();
+        if (newCount !== lastColumnCount) {
+            renderGallery(currentFilter);
+        }
+    }, 200);
+});
+
+/* ---------- LIGHTBOX ---------- */
+const galLightbox = document.getElementById('galLightbox');
+const galLightboxContent = document.getElementById('galLightboxContent');
+const galLightboxTitle = document.getElementById('galLightboxTitle');
+const galLightboxDesc = document.getElementById('galLightboxDesc');
+const galCloseBtn = document.getElementById('galCloseBtn');
+
+function openLightbox(item) {
+    galLightboxContent.innerHTML = '';
+
+    if (item.type === 'video') {
+        const video = document.createElement('video');
+        video.src = item.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.addEventListener('error', () => {
+            galLightboxContent.innerHTML = brokenCardHTML(item.src, 'Video');
+        });
+        galLightboxContent.appendChild(video);
+    } else {
+        const img = document.createElement('img');
+        img.alt = item.title;
+        img.addEventListener('error', () => {
+            galLightboxContent.innerHTML = brokenCardHTML(item.src, 'Photo');
+        });
+        img.src = item.src;
+        galLightboxContent.appendChild(img);
+    }
+
+    galLightboxTitle.textContent = item.title;
+    galLightboxDesc.textContent = item.description;
+    galLightbox.classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    galLightboxContent.innerHTML = '';
+    galLightbox.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+galCloseBtn.addEventListener('click', closeLightbox);
+galLightbox.addEventListener('click', (e) => {
+    if (e.target === galLightbox) closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+/* ---------- INIT ---------- */
+renderGallery('all');
+</script>
+
+</body>
+</html>
