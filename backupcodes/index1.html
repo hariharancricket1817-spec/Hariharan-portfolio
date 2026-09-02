@@ -29,6 +29,246 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+      <style>
+/* =========================================================
+   PROJECTS TIMELINE — SELF-CONTAINED (tl- namespace)
+   No shared class names with rest of site — zero collisions.
+========================================================= */
+
+.tl-subtitle{
+    color:#bfc9d4;
+    font-size:17px;
+    margin-top:-20px;
+    margin-bottom:50px;
+    line-height:1.8;
+    max-width:700px;
+}
+
+.tl-timeline{
+    position:relative;
+    margin-left:30px;
+    padding-left:40px;
+}
+
+.tl-timeline::before{
+    content:"";
+    position:absolute;
+    left:12px; top:0; bottom:0;
+    width:4px;
+    border-radius:20px;
+    background:linear-gradient(to bottom,#00e676,#00b0ff,#a855f7);
+    box-shadow:0 0 18px rgba(0,230,118,.35);
+}
+
+.tl-item{
+    position:relative;
+    margin-bottom:55px;
+}
+.tl-item:last-child{ margin-bottom:0; }
+
+.tl-dot{
+    position:absolute;
+    left:-38px; top:30px;
+    width:22px; height:22px;
+    border-radius:50%;
+    background:#1b2635;
+    border:5px solid #00e676;
+    box-shadow:0 0 15px rgba(0,230,118,.6);
+    z-index:10;
+    animation:tlPulse 2.2s infinite;
+}
+.tl-dot--green{ border-color:#00e676; box-shadow:0 0 15px rgba(0,230,118,.6); }
+.tl-dot--blue{ border-color:#00b0ff; box-shadow:0 0 15px rgba(0,176,255,.6); }
+.tl-dot--amber{ border-color:#ffca28; box-shadow:0 0 15px rgba(255,202,40,.65); }
+.tl-dot--cyan{ border-color:#22d3ee; box-shadow:0 0 15px rgba(34,211,238,.6); }
+.tl-dot--purple{ border-color:#a855f7; box-shadow:0 0 15px rgba(168,85,247,.6); }
+
+@keyframes tlPulse{
+    0%{ transform:scale(1); }
+    50%{ transform:scale(1.18); }
+    100%{ transform:scale(1); }
+}
+
+/* CARD */
+.tl-card{
+    background:#26344a;
+    border-radius:22px;
+    padding:34px;
+    position:relative;
+    overflow:hidden;
+    transition:.4s ease;
+    border:1px solid rgba(255,255,255,.07);
+    box-shadow:0 15px 40px rgba(0,0,0,.22);
+}
+.tl-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 28px 60px rgba(0,0,0,.32);
+}
+.tl-card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    height:4px; width:100%;
+}
+.tl-card--green::before{ background:linear-gradient(90deg,#00e676,#00b0ff); }
+.tl-card--blue::before{ background:linear-gradient(90deg,#00b0ff,#4b7dff); }
+.tl-card--amber::before{ background:linear-gradient(90deg,#ffca28,#ff9800); }
+.tl-card--cyan::before{ background:linear-gradient(90deg,#22d3ee,#00b0ff); }
+.tl-card--purple::before{ background:linear-gradient(90deg,#7b2ff7,#a855f7); }
+
+.tl-card--green:hover{ box-shadow:0 28px 60px rgba(0,0,0,.32),0 0 25px rgba(0,230,118,.15); }
+.tl-card--blue:hover{ box-shadow:0 28px 60px rgba(0,0,0,.32),0 0 25px rgba(0,176,255,.15); }
+.tl-card--amber:hover{ box-shadow:0 28px 60px rgba(0,0,0,.32),0 0 25px rgba(255,202,40,.15); }
+.tl-card--cyan:hover{ box-shadow:0 28px 60px rgba(0,0,0,.32),0 0 25px rgba(34,211,238,.15); }
+.tl-card--purple:hover{ box-shadow:0 28px 60px rgba(0,0,0,.32),0 0 25px rgba(168,85,247,.15); }
+
+/* TOP ROW */
+.tl-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:18px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+}
+.tl-title{
+    margin:0;
+    font-size:clamp(19px,3vw,26px);
+    font-weight:700;
+    color:#fff;
+    line-height:1.3;
+}
+.tl-role{
+    display:inline-block;
+    margin-top:8px;
+    padding:7px 15px;
+    background:rgba(255,255,255,.08);
+    border-radius:50px;
+    font-size:13px;
+    font-weight:600;
+    color:#9fd6c7;
+    max-width:100%;
+    word-break:break-word;
+}
+
+/* BADGE (status) */
+.tl-badge{
+    padding:9px 16px;
+    border-radius:50px;
+    font-size:13px;
+    font-weight:700;
+    color:#fff;
+    white-space:normal;
+    line-height:1.4;
+    flex-shrink:0;
+}
+.tl-badge--green{ background:#00c853; }
+.tl-badge--blue{ background:#0091d5; }
+.tl-badge--amber{ background:#ff9800; }
+.tl-badge--cyan{ background:#0891b2; }
+.tl-badge--purple{ background:linear-gradient(135deg,#7b2ff7,#a855f7); }
+
+/* DESCRIPTION */
+.tl-desc{
+    font-size:15.5px;
+    line-height:1.85;
+    margin:0 0 28px;
+    color:#d7dfe8;
+    text-align:left;
+}
+
+/* GRID / BOX */
+.tl-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+    margin-bottom:28px;
+}
+.tl-box{
+    background:rgba(255,255,255,.04);
+    padding:22px;
+    border-radius:16px;
+    border-left:4px solid #00e676;
+    transition:.3s;
+}
+.tl-box:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.07);
+}
+.tl-box--green{ border-left-color:#00e676; }
+.tl-box--blue{ border-left-color:#00b0ff; }
+.tl-box--amber{ border-left-color:#ff9800; }
+.tl-box--cyan{ border-left-color:#22d3ee; }
+.tl-box--purple{ border-left-color:#a855f7; }
+
+.tl-box h5{
+    margin-bottom:16px;
+    font-size:16.5px;
+    color:#fff;
+}
+.tl-box ul{
+    margin:0;
+    padding-left:18px;
+}
+.tl-box li{
+    margin-bottom:10px;
+    line-height:1.6;
+    font-size:14.5px;
+    color:#d7dfe8;
+}
+
+/* TECH STACK */
+.tl-tech{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+.tl-tech span{
+    padding:9px 16px;
+    border-radius:50px;
+    font-size:13.5px;
+    font-weight:600;
+    transition:.3s;
+}
+.tl-tech--green span{ background:rgba(0,230,118,.12); color:#00e676; border:1px solid rgba(0,230,118,.25); }
+.tl-tech--green span:hover{ background:#00e676; color:#fff; transform:translateY(-3px); }
+
+.tl-tech--blue span{ background:rgba(0,176,255,.12); color:#4fc3ff; border:1px solid rgba(0,176,255,.25); }
+.tl-tech--blue span:hover{ background:#00b0ff; color:#fff; transform:translateY(-3px); }
+
+.tl-tech--amber span{ background:rgba(255,152,0,.12); color:#ffb74d; border:1px solid rgba(255,152,0,.25); }
+.tl-tech--amber span:hover{ background:#ff9800; color:#fff; transform:translateY(-3px); }
+
+.tl-tech--cyan span{ background:rgba(34,211,238,.12); color:#67e8f9; border:1px solid rgba(34,211,238,.25); }
+.tl-tech--cyan span:hover{ background:#22d3ee; color:#0b1220; transform:translateY(-3px); }
+
+.tl-tech--purple span{ background:rgba(168,85,247,.12); color:#c9a6ff; border:1px solid rgba(168,85,247,.25); }
+.tl-tech--purple span:hover{ background:#a855f7; color:#fff; transform:translateY(-3px); }
+
+/* RESPONSIVE */
+@media(max-width:991px){
+    .tl-grid{ grid-template-columns:1fr; }
+}
+
+@media(max-width:768px){
+    .tl-timeline{ margin-left:10px; padding-left:26px; }
+    .tl-timeline::before{ left:8px; }
+    .tl-dot{ left:-24px; width:18px; height:18px; top:28px; }
+    .tl-card{ padding:24px; border-radius:18px; }
+    .tl-title{ font-size:20px; }
+    .tl-desc{ font-size:14.5px; }
+    .tl-badge{ width:100%; text-align:center; }
+    .tl-top{ flex-direction:column; align-items:flex-start; }
+}
+
+@media(max-width:480px){
+    .tl-card{ padding:20px; }
+    .tl-role{ font-size:12px; }
+    .tl-subtitle{ font-size:14.5px; }
+    .tl-box{ padding:18px; }
+    .tl-box h5{ font-size:15px; }
+}
+</style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
         <!-- Google tag (gtag.js) -->
@@ -48,6 +288,34 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "xpzh58rgjr");
 </script>
+
+<style>
+/* FORCE FIX: journey-item status dots being overridden by
+   the later .status (pill) rule defined in Projects Timeline */
+.journey-item .status {
+    width: 15px !important;
+    height: 15px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    margin-top: 7px !important;
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    font-size: 0 !important;
+    white-space: normal !important;
+    display: inline-block !important;
+}
+
+.journey-item .status.done {
+    background: #00ff9d !important;
+    box-shadow: 0 0 10px #00ff9d, 0 0 25px rgba(0,255,157,.5) !important;
+}
+
+.journey-item .status.progress {
+    background: #ffbf00 !important;
+    box-shadow: 0 0 10px #ffbf00, 0 0 25px rgba(255,191,0,.5) !important;
+}
+</style>
     </head>
 
     <body>
@@ -94,6 +362,8 @@
 
             <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
 
+            <li><a href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+
         </ul>
 
         <!-- Right Side -->
@@ -139,7 +409,7 @@
                         </div>
                       
                         <div class="d-flex align-items-end justify-content-between border-center mt-auto p-4">
-                           <a href="Hariharan J T Resume.pdf" download class="btn btn-primary"> <i class="fa-solid fa-download me-2"></i>Download Resume</a>
+                           <a href="assets/Hariharan_J_T_Resume.pdf" download class="btn btn-primary"> <i class="fa-solid fa-download me-2"></i>Download Resume</a>
                             
                         </div>
                     </div>
@@ -710,207 +980,153 @@ WHY HIRE ME
         SKILLS DASHBOARD
 ===========================-->
 
-<section id="skills" class="py-5 border-bottom">
+<section id="skills" class="sk2-section py-5 border-bottom">
 
     <h1 class="title pb-3 mb-5">
         TECHNICAL SKILLS
     </h1>
 
-    <div class="skills-dashboard">
+    <style>
+        .sk2-section, .sk2-section *{box-sizing:border-box}
+        .sk2-section{color:#e8edf2}
+        .sk2-tabs{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.75rem}
+        .sk2-tab{display:flex;align-items:center;gap:.5rem;padding:.55rem 1.1rem;border-radius:999px;background:#16212c;border:1px solid #223140;color:#9fb1c0;font-size:.9rem;cursor:pointer;transition:all .15s ease;white-space:nowrap}
+        .sk2-tab i{font-size:.95rem}
+        .sk2-tab:hover{border-color:#2dd4bf;color:#e8edf2}
+        .sk2-tab.sk2-is-active{background:#0f2e2c;border-color:#2dd4bf;color:#5eead4}
+        .sk2-panel{display:none}
+        .sk2-panel.sk2-is-active{display:block;animation:sk2fade .25s ease}
+        @keyframes sk2fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+        .sk2-panel-head{display:flex;align-items:center;gap:.85rem;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid #1c2833}
+        .sk2-panel-head i{font-size:1.3rem;color:#2dd4bf}
+        .sk2-panel-head h3{margin:0;font-size:1.1rem;color:#e8edf2}
+        .sk2-panel-head small{color:#7c8fa0}
 
-        <!-- Programming -->
+        .sk2-row{display:flex;flex-wrap:wrap;align-items:center;column-gap:1.25rem;row-gap:.6rem;padding:.9rem 0;border-bottom:1px solid #161f28}
+        .sk2-row:last-child{border-bottom:none}
+        .sk2-row-name{flex:1 1 150px;min-width:100px;font-weight:500;color:#e8edf2;font-size:.95rem}
+        .sk2-meter{flex:4 1 160px;min-width:90px;height:6px;border-radius:999px;background:#1a2530;overflow:hidden;order:2}
+        .sk2-meter-fill{height:100%;border-radius:999px}
+        .sk2-fill-basic{width:25%;background:#5b6b7a}
+        .sk2-fill-learning{width:40%;background:#e8b73a}
+        .sk2-fill-intermediate{width:65%;background:#0d9488}
+        .sk2-fill-good{width:85%;background:#14b8a6}
+        .sk2-fill-advanced{width:100%;background:#2dd4bf}
+        .sk2-badge{flex:0 0 auto;order:3;margin-left:auto;font-size:.72rem;font-weight:600;padding:.28rem .65rem;border-radius:6px;white-space:nowrap}
+        .sk2-badge-basic{background:#232f3a;color:#9fb1c0}
+        .sk2-badge-learning{background:#3a2f12;color:#eab308}
+        .sk2-badge-intermediate{background:#0d2622;color:#2dd4bf}
+        .sk2-badge-good{background:#0f2e2a;color:#5eead4}
+        .sk2-badge-advanced{background:#0f2e22;color:#6ee7b7}
 
-        <div class="skill-category">
+        .sk2-roadmap{margin-top:2.5rem;padding:1.75rem;border-radius:16px;background:linear-gradient(135deg,#0f2622,#0c1922);border:1px solid #1e3a35}
+        .sk2-roadmap-head{display:flex;align-items:center;gap:.7rem;margin-bottom:1.25rem}
+        .sk2-roadmap-head i{color:#2dd4bf;font-size:1.15rem}
+        .sk2-roadmap-head h4{margin:0;font-size:1.05rem;color:#e8edf2}
+        .sk2-roadmap-head small{display:block;color:#7c8fa0;font-size:.8rem;margin-top:.1rem}
+        .sk2-roadmap-tags{display:flex;flex-wrap:wrap;gap:.75rem}
+        .sk2-roadmap-tags span{box-sizing:border-box;flex:1 1 130px;text-align:center;padding:.7rem 1rem;border-radius:10px;border:1px solid #23473f;background:#0f231f;color:#7fe0d4;font-size:.92rem;font-weight:500}
 
-            <div class="skill-header">
-                <i class="fas fa-code"></i>
-                <div>
-                    <h3>Programming</h3>
-                    <small>Languages & Scripting</small>
-                </div>
+        @media (max-width:520px){
+            .sk2-row-name{flex-basis:100%}
+            .sk2-meter{flex-basis:100%;order:2}
+            .sk2-badge{margin-left:0;order:3}
+            .sk2-tab{font-size:.82rem;padding:.5rem .9rem}
+            .sk2-tab span.sk2-tab-full{display:none}
+            .sk2-roadmap{padding:1.25rem}
+            .sk2-roadmap-tags span{flex:1 1 45%}
+        }
+    </style>
+
+    <div class="sk2-tabs" role="tablist">
+        <button class="sk2-tab sk2-is-active" data-target="sk2-programming"><i class="fas fa-code"></i><span class="sk2-tab-full">Programming</span></button>
+        <button class="sk2-tab" data-target="sk2-web"><i class="fas fa-laptop-code"></i><span class="sk2-tab-full">Web Development</span></button>
+        <button class="sk2-tab" data-target="sk2-devops"><i class="fas fa-infinity"></i><span class="sk2-tab-full">DevOps</span></button>
+        <button class="sk2-tab" data-target="sk2-cloud"><i class="fas fa-cloud"></i><span class="sk2-tab-full">Cloud</span></button>
+        <button class="sk2-tab" data-target="sk2-os"><i class="fab fa-linux"></i><span class="sk2-tab-full">Operating Systems</span></button>
+        <button class="sk2-tab" data-target="sk2-network"><i class="fas fa-network-wired"></i><span class="sk2-tab-full">Networking & Tools</span></button>
+        <button class="sk2-tab" data-target="sk2-concepts"><i class="fas fa-layer-group"></i><span class="sk2-tab-full">Concepts</span></button>
+    </div>
+
+    <div id="sk2-programming" class="sk2-panel sk2-is-active">
+        <div class="sk2-panel-head"><i class="fas fa-code"></i><div><h3>Programming</h3><small>Languages &amp; scripting</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">Python</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-intermediate"></div></div><span class="sk2-badge sk2-badge-intermediate">Intermediate</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Java</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">C</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Bash Scripting</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+    </div>
+
+    <div id="sk2-web" class="sk2-panel">
+        <div class="sk2-panel-head"><i class="fas fa-laptop-code"></i><div><h3>Web Development</h3><small>Frontend fundamentals</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">HTML5</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-intermediate"></div></div><span class="sk2-badge sk2-badge-intermediate">Intermediate</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">CSS3</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-intermediate"></div></div><span class="sk2-badge sk2-badge-intermediate">Intermediate</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">JavaScript</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+    </div>
+
+    <div id="sk2-devops" class="sk2-panel">
+        <div class="sk2-panel-head"><i class="fas fa-infinity"></i><div><h3>DevOps</h3><small>Current career focus</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">Docker</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-intermediate"></div></div><span class="sk2-badge sk2-badge-intermediate">Intermediate</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Docker Compose</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-intermediate"></div></div><span class="sk2-badge sk2-badge-intermediate">Intermediate</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Git</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-good"></div></div><span class="sk2-badge sk2-badge-good">Good</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">GitHub</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-good"></div></div><span class="sk2-badge sk2-badge-good">Good</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">GitHub Actions</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Nginx</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">CI/CD Pipelines</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Version Control</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-good"></div></div><span class="sk2-badge sk2-badge-good">Good</span></div>
+    </div>
+
+    <div id="sk2-cloud" class="sk2-panel">
+        <div class="sk2-panel-head"><i class="fas fa-cloud"></i><div><h3>Cloud</h3><small>Cloud technologies</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">AWS EC2</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Security Groups</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">IAM</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">S3</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">VPC</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Microsoft Azure</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+    </div>
+
+    <div id="sk2-os" class="sk2-panel">
+        <div class="sk2-panel-head"><i class="fab fa-linux"></i><div><h3>Operating Systems</h3><small>Development environment</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">Linux (Ubuntu)</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Windows</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-advanced"></div></div><span class="sk2-badge sk2-badge-advanced">Daily Use</span></div>
+    </div>
+
+    <div id="sk2-network" class="sk2-panel">
+        <div class="sk2-panel-head"><i class="fas fa-network-wired"></i><div><h3>Networking &amp; Remote Tools</h3><small>Connectivity &amp; remote access</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">TCP/IP</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">SSH</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-intermediate"></div></div><span class="sk2-badge sk2-badge-intermediate">Intermediate</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">SCP</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">PuTTY</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">WinSCP</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+    </div>
+
+    <div id="sk2-concepts" class="sk2-panel">
+        <div class="sk2-panel-head"><i class="fas fa-layer-group"></i><div><h3>Concepts</h3><small>Working knowledge</small></div></div>
+        <div class="sk2-row"><span class="sk2-row-name">SDLC</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Agile / Scrum</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">REST API</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-basic"></div></div><span class="sk2-badge sk2-badge-basic">Basic</span></div>
+        <div class="sk2-row"><span class="sk2-row-name">Monitoring &amp; Logging</span><div class="sk2-meter"><div class="sk2-meter-fill sk2-fill-learning"></div></div><span class="sk2-badge sk2-badge-learning">Learning</span></div>
+    </div>
+
+    <div class="sk2-roadmap">
+        <div class="sk2-roadmap-head">
+            <i class="fas fa-rocket"></i>
+            <div>
+                <h4>Learning Roadmap</h4>
+                <small>Next technologies I'm working toward</small>
             </div>
-
-            <div class="skill-list">
-
-                <div class="skill-item">
-                    <span>Python</span>
-                    <span class="level intermediate">Intermediate</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>Java</span>
-                    <span class="level basic">Basic</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>C</span>
-                    <span class="level basic">Basic</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>Shell Scripting</span>
-                    <span class="level learning">Learning</span>
-                </div>
-
-            </div>
-
         </div>
-
-        <!-- Web -->
-
-        <div class="skill-category">
-
-            <div class="skill-header">
-                <i class="fas fa-laptop-code"></i>
-                <div>
-                    <h3>Web Development</h3>
-                    <small>Frontend Fundamentals</small>
-                </div>
-            </div>
-
-            <div class="skill-list">
-
-                <div class="skill-item">
-                    <span>HTML5</span>
-                    <span class="level intermediate">Intermediate</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>CSS3</span>
-                    <span class="level intermediate">Intermediate</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>JavaScript</span>
-                    <span class="level basic">Basic</span>
-                </div>
-
-            </div>
-
+        <div class="sk2-roadmap-tags">
+            <span>Terraform</span>
+            <span>Kubernetes</span>
+            <span>Ansible</span>
+            <span>Prometheus</span>
+            <span>Grafana</span>
         </div>
-
-        <!-- DevOps -->
-
-        <div class="skill-category featured">
-
-            <div class="skill-header">
-                <i class="fas fa-infinity"></i>
-                <div>
-                    <h3>DevOps</h3>
-                    <small>Current Career Focus</small>
-                </div>
-            </div>
-
-            <div class="skill-list">
-
-                <div class="skill-item">
-                    <span>Docker</span>
-                    <span class="level intermediate">Intermediate</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>Git</span>
-                    <span class="level advanced">Good</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>GitHub</span>
-                    <span class="level advanced">Good</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>GitHub Actions</span>
-                    <span class="level learning">Learning</span>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Cloud -->
-
-        <div class="skill-category">
-
-            <div class="skill-header">
-                <i class="fas fa-cloud"></i>
-                <div>
-                    <h3>Cloud</h3>
-                    <small>Cloud Technologies</small>
-                </div>
-            </div>
-
-            <div class="skill-list">
-
-                <div class="skill-item">
-                    <span>AWS</span>
-                    <span class="level learning">Learning</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>Microsoft Azure</span>
-                    <span class="level basic">Basic</span>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Operating Systems -->
-
-        <div class="skill-category">
-
-            <div class="skill-header">
-                <i class="fab fa-linux"></i>
-                <div>
-                    <h3>Operating Systems</h3>
-                    <small>Development Environment</small>
-                </div>
-            </div>
-
-            <div class="skill-list">
-
-                <div class="skill-item">
-                    <span>Linux (Ubuntu)</span>
-                    <span class="level learning">Learning</span>
-                </div>
-
-                <div class="skill-item">
-                    <span>Windows</span>
-                    <span class="level advanced">Daily Use</span>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Future Learning -->
-
-        <div class="skill-category roadmap">
-
-            <div class="skill-header">
-                <i class="fas fa-rocket"></i>
-                <div>
-                    <h3>Learning Roadmap</h3>
-                    <small>Next Technologies</small>
-                </div>
-            </div>
-
-            <div class="roadmap-tags">
-
-                <span>Github Action</span>
-                <span>Terraform</span>
-                <span>Kubernetes</span>
-                <span>Ansible</span>
-                <span>Prometheus</span>
-                <span>Grafana</span>
-
-            </div>
-
-        </div>
-
     </div>
 
 </section>
+
 <!-- =========================================
         MY LEARNING JOURNEY
 ========================================== -->
@@ -1048,264 +1264,250 @@ WHY HIRE ME
 <!-- PROJECTS & TECHNICAL EXPERIENCE START -->
 <!-- ========================================= -->
 
-<section id="projects" class="py-5 border-bottom project-section">
+<section id="projects" class="py-5 border-bottom tl-section">
 
     <h1 class="title pb-3 mb-5">
         PROJECTS & TECHNICAL EXPERIENCE
     </h1>
 
-    <p class="project-section-subtitle">
+    <p class="tl-subtitle">
         Practical projects, leadership experience and continuous learning
-        towards becoming a DevOps & Cloud Engineer.
+        towards becoming a DevOps &amp; Cloud Engineer.
     </p>
 
-    <div class="project-timeline">
+    <div class="tl-timeline">
 
-        <!-- ====================================== -->
         <!-- PROJECT 1 -->
-        <!-- ====================================== -->
+        <div class="tl-item">
+            <div class="tl-dot tl-dot--green"></div>
+            <div class="tl-card tl-card--green">
 
-        <div class="timeline-item">
-
-            <div class="timeline-dot active"></div>
-
-            <div class="timeline-card">
-
-                <div class="project-top">
-
+                <div class="tl-top">
                     <div>
-
-                        <h3>
-                            Smart College Management System
-                        </h3>
-
-                        <span class="project-role">
-                            Project Team Lead
-                        </span>
-
+                        <h3 class="tl-title">Smart College Management System</h3>
+                        <span class="tl-role">Project Team Lead</span>
                     </div>
-
-                    <div class="status ongoing">
-                        ● Ongoing
-                    </div>
-
+                    <span class="tl-badge tl-badge--green">● Ongoing</span>
                 </div>
 
-                <p class="project-description">
-
-                    Smart College Management System is an ongoing
-                    team project designed to digitize and simplify
-                    various academic processes.
-
-                    As the Project Team Lead, I am responsible for
-                    planning the project structure, coordinating the
-                    development team, maintaining the GitHub repository,
-                    managing version control, and contributing to both
-                    frontend and backend development.
-
-                    The project also includes an AI-powered handwriting
-                    verification module, and after completion I plan
-                    to deploy the application using AWS and modern
-                    DevOps practices.
-
+                <p class="tl-desc">
+                    An ongoing team project designed to digitize and simplify various
+                    academic processes. As Project Team Lead, I plan the project
+                    structure, coordinate the development team, manage the GitHub
+                    repository and version control, and contribute to both frontend
+                    and backend development. The project also includes an AI-powered
+                    handwriting verification module, with a planned AWS deployment
+                    using modern DevOps practices.
                 </p>
 
-                <div class="project-grid">
-
-                    <div class="project-box">
-
-                        <h5>
-                            👨‍💻 My Responsibilities
-                        </h5>
-
+                <div class="tl-grid">
+                    <div class="tl-box tl-box--green">
+                        <h5>👨‍💻 My Responsibilities</h5>
                         <ul>
-
                             <li>Overall Project Architecture</li>
-
                             <li>Team Coordination</li>
-
                             <li>GitHub Repository Management</li>
-
                             <li>Version Control</li>
-
                             <li>Frontend Development</li>
-
                             <li>Backend Development</li>
-
                             <li>Deployment Planning</li>
-
                         </ul>
-
                     </div>
-
-                    <div class="project-box">
-
-                        <h5>
-                            🎯 Project Highlights
-                        </h5>
-
+                    <div class="tl-box tl-box--green">
+                        <h5>🎯 Project Highlights</h5>
                         <ul>
-
                             <li>Integrated AI Handwriting Module</li>
-
-                            <li>Student & Staff Portal</li>
-
+                            <li>Student &amp; Staff Portal</li>
                             <li>Assignment Management</li>
-
                             <li>Role Based Authentication</li>
-
                             <li>Future AWS Deployment</li>
-
                             <li>DevOps Learning Integration</li>
-
                         </ul>
-
                     </div>
-
                 </div>
 
-                <div class="tech-stack">
-
-                    <span>Python</span>
-
-                    <span>Flask</span>
-
-                    <span>MySQL</span>
-
-                    <span>Git</span>
-
-                    <span>GitHub</span>
-
-                    <span>Docker</span>
-
+                <div class="tl-tech tl-tech--green">
+                    <span>Python</span><span>Flask</span><span>MySQL</span>
+                    <span>Git</span><span>GitHub</span><span>Docker</span>
                     <span>AWS (Learning)</span>
-
                 </div>
 
             </div>
-
         </div>
 
-        <!-- ====================================== -->
         <!-- PROJECT 2 -->
-        <!-- ====================================== -->
+        <div class="tl-item">
+            <div class="tl-dot tl-dot--blue"></div>
+            <div class="tl-card tl-card--blue">
 
-        <div class="timeline-item">
-
-            <div class="timeline-dot workshop"></div>
-
-            <div class="timeline-card">
-
-                <div class="project-top">
-
+                <div class="tl-top">
                     <div>
-
-                        <h3>
-                            Flutter Development Workshop
-                        </h3>
-
-                        <span class="project-role">
-                            Workshop Experience
-                        </span>
-
+                        <h3 class="tl-title">Flutter Development Workshop</h3>
+                        <span class="tl-role">Workshop Experience</span>
                     </div>
-
-                    <div class="status workshop-status">
-
-                        Workshop
-
-                    </div>
-
+                    <span class="tl-badge tl-badge--blue">Workshop</span>
                 </div>
 
-                <p class="project-description">
-
-                    Participated in a one-week Flutter Development
-                    Workshop to gain exposure to mobile application
-                    development.
-
-                    This workshop helped me understand Flutter basics,
-                    UI design concepts and cross-platform development.
-
-                    Although Flutter is not my primary career focus,
-                    it strengthened my understanding of modern software
-                    development practices.
-
+                <p class="tl-desc">
+                    Participated in a one-week Flutter Development Workshop to gain
+                    exposure to mobile application development — covering Flutter
+                    basics, UI design concepts and cross-platform development.
+                    Although Flutter isn't my primary career focus, it strengthened
+                    my understanding of modern software development practices.
                 </p>
 
-                <div class="tech-stack">
-
-                    <span>Flutter</span>
-
-                    <span>Dart</span>
-
-                    <span>Mobile UI</span>
-
+                <div class="tl-tech tl-tech--blue">
+                    <span>Flutter</span><span>Dart</span><span>Mobile UI</span>
                 </div>
 
             </div>
-
         </div>
 
-        <!-- ====================================== -->
         <!-- PROJECT 3 -->
-        <!-- ====================================== -->
+        <div class="tl-item">
+            <div class="tl-dot tl-dot--amber"></div>
+            <div class="tl-card tl-card--amber">
 
-        <div class="timeline-item">
-
-            <div class="timeline-dot completed"></div>
-
-            <div class="timeline-card">
-
-                <div class="project-top">
-
+                <div class="tl-top">
                     <div>
-
-                        <h3>
-
-                            Deaf Audio Enhancer
-
-                        </h3>
-
-                        <span class="project-role">
-
-                            Frontend Contributor
-
-                        </span>
-
+                        <h3 class="tl-title">Deaf Audio Enhancer</h3>
+                        <span class="tl-role">Frontend Contributor</span>
                     </div>
-
-                    <div class="status completed-status">
-
-                 Completed
-
-                    </div>
-
+                    <span class="tl-badge tl-badge--amber">Completed</span>
                 </div>
 
-                <p class="project-description">
-
-                    Supported an Electronics & Communication Engineering
-                    project by designing a simple responsive presentation
-                    website.
-
-                    My contribution was limited to creating the project's
-                    frontend interface for demonstration purposes.
-
+                <p class="tl-desc">
+                    Supported an Electronics &amp; Communication Engineering project
+                    by designing a simple, responsive presentation website. My
+                    contribution was limited to creating the project's frontend
+                    interface for demonstration purposes.
                 </p>
 
-                <div class="tech-stack">
-
-                    <span>HTML</span>
-
-                    <span>CSS</span>
-
-                    <span>JavaScript</span>
-
+                <div class="tl-tech tl-tech--amber">
+                    <span>HTML</span><span>CSS</span><span>JavaScript</span>
                 </div>
 
             </div>
+        </div>
 
+        <!-- PROJECT 4 -->
+        <div class="tl-item">
+            <div class="tl-dot tl-dot--cyan"></div>
+            <div class="tl-card tl-card--cyan">
+
+                <div class="tl-top">
+                    <div>
+                        <h3 class="tl-title">AWS Cloud Portfolio Deployment</h3>
+                        <span class="tl-role">DevOps &amp; Cloud Technical Experience</span>
+                    </div>
+                    <span class="tl-badge tl-badge--cyan">● Deployed</span>
+                </div>
+
+                <p class="tl-desc">
+                    Deployed and hosted my personal portfolio website on AWS EC2 as
+                    hands-on DevOps and Cloud engineering experience. Configured a
+                    Linux-based EC2 environment, connected via SSH, transferred and
+                    managed project files, configured Nginx as the web server, and
+                    made the application accessible through the EC2 public IP —
+                    gaining practical experience with cloud deployment, Linux
+                    server administration, networking, security groups, and
+                    production deployment workflows.
+                </p>
+
+                <div class="tl-grid">
+                    <div class="tl-box tl-box--cyan">
+                        <h5>☁️ Technical Experience</h5>
+                        <ul>
+                            <li>AWS EC2 Instance Deployment</li>
+                            <li>Linux Server Administration</li>
+                            <li>SSH Remote Server Access</li>
+                            <li>Nginx Web Server Configuration</li>
+                            <li>Git Repository Management</li>
+                            <li>SCP File Transfer</li>
+                            <li>AWS Security Group Configuration</li>
+                        </ul>
+                    </div>
+                    <div class="tl-box tl-box--cyan">
+                        <h5>🚀 Deployment Highlights</h5>
+                        <ul>
+                            <li>Hosted Portfolio on AWS EC2</li>
+                            <li>Configured HTTP Port 80</li>
+                            <li>Configured SSH Port 22</li>
+                            <li>Connected Using Public IP</li>
+                            <li>Managed Linux Server Environment</li>
+                            <li>Configured Nginx Web Hosting</li>
+                            <li>Applied Cloud Deployment Workflow</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tl-tech tl-tech--cyan">
+                    <span>AWS EC2</span><span>Linux</span><span>SSH</span>
+                    <span>Git</span><span>GitHub</span><span>Nginx</span>
+                    <span>SCP</span><span>AWS Security Groups</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 5 — FREELANCE EXPERIENCE -->
+        <div class="tl-item">
+            <div class="tl-dot tl-dot--purple"></div>
+            <div class="tl-card tl-card--purple">
+
+                <div class="tl-top">
+                    <div>
+                        <h3 class="tl-title">Freelance Digital Service Provider</h3>
+                        <span class="tl-role">Freelance • Remote</span>
+                    </div>
+                    <span class="tl-badge tl-badge--purple">Sep 2023 – Present · 3 yrs</span>
+                </div>
+
+                <p class="tl-desc">
+                    Providing online government and digital documentation services
+                    to individuals during college and alongside academics —
+                    including Aadhaar updates, PAN applications, voter ID
+                    registration, income and community certificates, bank account
+                    services, and online ticket booking. Balancing this freelance
+                    work with academics has built strong real-world customer
+                    service, problem-solving, documentation, and digital process
+                    management skills.
+                </p>
+
+                <div class="tl-grid">
+                    <div class="tl-box tl-box--purple">
+                        <h5>🧾 Services Handled</h5>
+                        <ul>
+                            <li>Aadhaar Card Updates</li>
+                            <li>PAN Card Applications</li>
+                            <li>Voter ID Registration</li>
+                            <li>Income &amp; Community Certificates</li>
+                            <li>Bank Account Services</li>
+                            <li>Online Ticket Booking</li>
+                        </ul>
+                    </div>
+                    <div class="tl-box tl-box--purple">
+                        <h5>💡 Skills Gained</h5>
+                        <ul>
+                            <li>Customer Service &amp; Communication</li>
+                            <li>Problem Solving Under Pressure</li>
+                            <li>Digital Documentation Handling</li>
+                            <li>Process &amp; Time Management</li>
+                            <li>Independent Client Handling</li>
+                            <li>Balancing Work with Academics</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tl-tech tl-tech--purple">
+                    <span>Digital Governance Portals</span>
+                    <span>Aadhaar / PAN Systems</span>
+                    <span>Documentation</span>
+                    <span>Customer Handling</span>
+                    <span>Self-Employment</span>
+                </div>
+
+            </div>
         </div>
 
     </div>
@@ -2141,5 +2343,53 @@ WHY HIRE ME
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
         <script src="js/script.js"></script>
+ 
+<script>
+(function(){
+    var tabs = document.querySelectorAll('.sk2-tab');
+    var panels = document.querySelectorAll('.sk2-panel');
+    tabs.forEach(function(tab){
+        tab.addEventListener('click', function(){
+            tabs.forEach(function(t){ t.classList.remove('sk2-is-active'); });
+            panels.forEach(function(p){ p.classList.remove('sk2-is-active'); });
+            tab.classList.add('sk2-is-active');
+            document.getElementById(tab.getAttribute('data-target')).classList.add('sk2-is-active');
+        });
+    });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const menuBtn  = document.querySelector('.menu-btn');
+  const navMenu  = document.querySelector('.nav-menu');
+  const icon     = menuBtn ? menuBtn.querySelector('i') : null;
+
+  if (menuBtn && navMenu) {
+    menuBtn.addEventListener('click', function () {
+      navMenu.classList.toggle('show');
+
+      // swap hamburger <-> close icon
+      if (icon) {
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      }
+    });
+
+    // close menu when a link is tapped (nice UX on mobile)
+    navMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('show');
+        if (icon) {
+          icon.classList.add('fa-bars');
+          icon.classList.remove('fa-times');
+        }
+      });
+    });
+  }
+});
+</script>
+
     </body>
 </html>
